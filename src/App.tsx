@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import "./App.css";
+import { ThemeContext } from "./Context/ThemeContext";
+import TodoApp from "./Components/TodoApp";
+import { TodoContextProvider } from "./Context/TodoContext";
+import { Everything } from "./Components/TodoStyles";
 
 function App() {
+  let context = useContext(ThemeContext);
+
+  const lightTheme = {
+    background: "#fff",
+    text: "#000",
+  };
+
+  const darkTheme = {
+    background: "#333",
+    text: "#fff",
+  };
+
+  console.log(context);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TodoContextProvider>
+      <Everything theme={context?.darkMode ? darkTheme : lightTheme}>
+        <TodoApp />
+      </Everything>
+    </TodoContextProvider>
   );
 }
 
