@@ -3,6 +3,7 @@ import React, { useState, createContext } from "react";
 interface TodoContextProps {
   todos: string[];
   addTodo: (todo: string) => void;
+  removeTodo: (index: number) => void;
 }
 
 interface Props {
@@ -19,8 +20,14 @@ export const TodoContextProvider: React.FC<Props> = ({ children }) => {
   const addTodo = (todo: string) => {
     setTodos([...todos, todo]);
   };
+
+  const removeTodo = (index: number) => {
+    let newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  };
   return (
-    <TodoContext.Provider value={{ todos, addTodo }}>
+    <TodoContext.Provider value={{ todos, addTodo, removeTodo }}>
       {children}
     </TodoContext.Provider>
   );

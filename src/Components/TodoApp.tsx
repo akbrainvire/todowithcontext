@@ -43,7 +43,7 @@ const TodoApp: React.FC = () => {
       </TodoInputStyle>
       <TodoContainer>
         {todos?.map((todo, index) => (
-          <Todo key={index} text={todo} />
+          <Todo key={index} i={index} text={todo} />
         ))}
       </TodoContainer>
     </>
